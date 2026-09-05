@@ -1,0 +1,7 @@
+{
+  "input_width": 320,
+  "input_height": 192,
+  "heatmap_width": 80,
+  "heatmap_height": 48,
+  "resize": "linear"
+}

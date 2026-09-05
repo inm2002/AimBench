@@ -1,0 +1,50 @@
+{
+  "cnn": {
+    "file": "cnn/model.onnx",
+    "sha256": "7cb7a98120f21cbbcf497827d699312180fc27b2eccc3fcc2d594977cc3b3fd1",
+    "bytes": 130810,
+    "input": {
+      "shape": [
+        1,
+        192,
+        320,
+        3
+      ],
+      "dtype": "uint8",
+      "layout": "NHWC RGB"
+    },
+    "output": {
+      "shape": [
+        1,
+        1,
+        48,
+        80
+      ],
+      "dtype": "float16"
+    },
+    "resize": "linear",
+    "opset": 18
+  },
+  "yolo": {
+    "file": "yolo/model.onnx",
+    "sha256": "f42f749a9ba208b7476451f612216c071ebf9dce82b64e66f4775380464dadbd",
+    "bytes": 9737445,
+    "input": {
+      "shape": [
+        1,
+        3,
+        384,
+        640
+      ],
+      "dtype": "float32",
+      "layout": "NCHW RGB"
+    },
+    "preprocess": "letterbox 114, RGB/255",
+    "batch": 1,
+    "max_targets": 3,
+    "min_confidence": 0.05,
+    "precision": "FP16",
+    "runtime": "TensorRT-YOLO 6.4.0",
+    "runtime_source_zip_sha256": "755d4d6ad524e55446e8aec39ce41bbf4c0e185e6cd811d7e77dc4f4ca455653"
+  }
+}

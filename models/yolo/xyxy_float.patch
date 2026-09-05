@@ -1,0 +1,29 @@
+--- a/modules/trtyolo/binding/trtyolo.cpp
++++ b/modules/trtyolo/binding/trtyolo.cpp
+@@ -69,6 +69,26 @@
+                 py::cast(owner)); },
+                                   "An array of shape (n, 4) containing the bounding boxes "
+                                   "coordinates in format [x1, y1, x2, y2].");
++
++        // Aimbench compatibility extension: the upstream xyxy accessor
++        // intentionally casts Box's float members to int.  Preserve that API,
++        // but expose the unrounded values for center-point control.
++        cls.def_property_readonly("xyxy_float", [](const ResultType& r) -> py::array {
++            auto* owner = new std::vector<float>;
++            owner->reserve(r.boxes.size() * 4);
++            for (const auto& b : r.boxes) {
++                owner->insert(owner->end(), {b.left, b.top, b.right, b.bottom});
++            }
++            return py::array(
++                py::buffer_info(
++                    owner->data(),
++                    sizeof(float),
++                    py::format_descriptor<float>::format(),
++                    2,
++                    std::vector<size_t>{r.boxes.size(), 4},
++                    std::vector<size_t>{sizeof(float) * 4, sizeof(float)}),
++                py::cast(owner)); },
++                                  "An array of shape (n, 4) containing unrounded float bounding boxes.");
+ 
+         if constexpr (std::is_same_v<ResultType, trtyolo::OBBRes>) {
+             cls.def_property_readonly("xyxyxyxy", [](const ResultType& r) -> py::array {

@@ -1,0 +1,30 @@
+{
+  "algorithm": "color",
+  "label": "",
+  "controller_params": {
+    "center_deadzone_px": 6
+  },
+  "calibration": {
+    "fx": 512.056,
+    "fy": 456.726,
+    "yaw_per_count": 0.00219291,
+    "pitch_per_count": 0.00244552
+  },
+  "conditions": {
+    "scenario": "Gridshot",
+    "sensitivity": 1.8,
+    "fov": 103,
+    "game_fps_limit": 300,
+    "weapon_hidden": true,
+    "calibration_reference_resolution": [
+      1280,
+      720
+    ]
+  },
+  "run": {
+    "window_keyword": "aimlab",
+    "output_dir": "runs",
+    "start_delay": 5,
+    "prompt_result": true
+  }
+}
